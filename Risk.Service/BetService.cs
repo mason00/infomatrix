@@ -18,7 +18,7 @@ namespace Risk.Service
 
         public IEnumerable<Settled> GetUnusualWin()
         {
-            return repository.SettledRecords.Where(x => x.Win / x.Stake > 0.6);
+            return repository.SettledRecords.Where(x => (double)x.Stake / (double)x.Win > 0.6);
         }
     }
 }
