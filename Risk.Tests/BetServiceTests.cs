@@ -57,7 +57,7 @@ namespace Risk.Tests
             mockRepo.Setup(repo => repo.UnsettledRecords).Returns(testData);
             var service = new BetService(mockRepo.Object);
 
-            Assert.AreEqual(1, service.GetHighRiskBets().Count());
+            Assert.AreEqual(1, service.GetUnsettledHighWinRate().Count());
         }
     }
 }
