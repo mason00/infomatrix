@@ -33,13 +33,23 @@ namespace Risk.Service
 
         public IEnumerable<UnSettled> GetUnsettledHighWinRate()
         {
+            return GetRiskBetByRate(10);
+        }
+
+        public IEnumerable<UnSettled> GetExtremeHighWinRate()
+        {
+            return GetRiskBetByRate(30);
+        }
+
+        private IEnumerable<UnSettled> GetRiskBetByRate(int rate = 10)
+        {
             var avg = repository.SettledRecords
                 .GroupBy(x => new { Cust = x.Customer })
                 .Select(g => new { Avg = g.Average(x => x.Stake), Cust = g.Key.Cust });
             var result = from cus in avg
                          join c in repository.UnsettledRecords
                          on cus.Cust equals c.Customer
-                         where c.Stake / 10 > cus.Avg
+                         where c.Stake / rate > cus.Avg
                          select c;
 
             return result;

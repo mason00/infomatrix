@@ -8,6 +8,7 @@ namespace Risk.Service
         IEnumerable<Settled> GetUnusualWin();
         IEnumerable<UnSettled> GetHighRiskBets();
         IEnumerable<UnSettled> GetUnsettledHighWinRate();
+        IEnumerable<UnSettled> GetExtremeHighWinRate();
         IEnumerable<UnSettled> GetUnsettledBigWin();
     }
 }

@@ -59,6 +59,27 @@ namespace Risk.Tests
 
             Assert.AreEqual(1, service.GetUnsettledHighWinRate().Count());
         }
+
+        [TestMethod]
+        public void Get30TimesAvgBetsTest()
+        {
+            var historyData = new List<Settled>();
+            historyData.Add(new Settled() { Customer = 1, Stake = 50 });
+            historyData.Add(new Settled() { Customer = 1, Stake = 50 });
+            historyData.Add(new Settled() { Customer = 2, Stake = 100 });
+            historyData.Add(new Settled() { Customer = 2, Stake = 100 });
+
+            var testData = new List<UnSettled>();
+            testData.Add(new UnSettled() { Customer = 1, Stake = 1400 });
+            testData.Add(new UnSettled() { Customer = 2, Stake = 3100 });
+
+            var mockRepo = new Mock<IBetRepository>();
+            mockRepo.Setup(repo => repo.SettledRecords).Returns(historyData);
+            mockRepo.Setup(repo => repo.UnsettledRecords).Returns(testData);
+            var service = new BetService(mockRepo.Object);
+
+            Assert.AreEqual(1, service.GetExtremeHighWinRate().Count());
+        }
     }
 }
 
