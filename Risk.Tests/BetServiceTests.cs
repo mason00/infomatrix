@@ -15,8 +15,8 @@ namespace Risk.Tests
         public void UnusualWinTest()
         {
             var testData = new List<Settled>();
-            testData.Add(new Settled() { Stake = 55, Win = 100 });
-            testData.Add(new Settled() { Stake = 65, Win = 100 });
+            testData.Add(new Settled() { Customer = 1, Event = 1, Stake = 50, Win = 0 });
+            testData.Add(new Settled() { Customer = 1, Event = 1, Stake = 50, Win = 61 });
 
             var mockRepo = new Mock<IBetRepository>();
             mockRepo.Setup(repo => repo.SettledRecords).Returns(testData);
@@ -29,8 +29,8 @@ namespace Risk.Tests
         public void UnsettledHighRiskBets()
         {
             var testData = new List<UnSettled>();
-            testData.Add(new UnSettled() { Stake = 55, ToWin = 100 });
-            testData.Add(new UnSettled() { Stake = 65, ToWin = 100 });
+            testData.Add(new UnSettled() { Customer = 1, Event = 1, Stake = 50, ToWin = 0 });
+            testData.Add(new UnSettled() { Customer = 1, Event = 1, Stake = 50, ToWin = 61 });
 
             var mockRepo = new Mock<IBetRepository>();
             mockRepo.Setup(repo => repo.UnsettledRecords).Returns(testData);

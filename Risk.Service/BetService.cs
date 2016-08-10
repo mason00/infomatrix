@@ -16,20 +16,22 @@ namespace Risk.Service
             repository = repo;
         }
 
-        public IEnumerable<UnSettled> GetHighRiskBets()
-        {
-            return repository.UnsettledRecords.Where(x => x.ToWin > 0 && (double)x.Stake / (double)x.ToWin > 0.6);
-        }
-
-        public IEnumerable<UnSettled> GetUnsettledBigWin()
-        {
-            return repository.UnsettledRecords.Where(x => x.ToWin > 1000);
-        }
-
         public IEnumerable<Settled> GetUnusualWin()
         {
-            return repository.SettledRecords.Where(x => x.Win > 0 && (double)x.Stake / (double)x.Win > 0.6);
+            return repository.SettledRecords
+                .GroupBy(x => new { Cust = x.Customer })
+                .Where(g => g.Sum(x => x.Stake) * 0.6 < g.Sum(x => x.Win))
+                .Select(a => new Settled() { Customer = a.Key.Cust });
         }
+
+        public IEnumerable<UnSettled> GetHighRiskBets()
+        {
+            return repository.UnsettledRecords
+                .GroupBy(x => new { Cust = x.Customer })
+                .Where(g => g.Sum(x => x.Stake) * 0.6 < g.Sum(x => x.ToWin))
+                .Select(a => new UnSettled() { Customer = a.Key.Cust });
+        }
+
 
         public IEnumerable<UnSettled> GetUnsettledHighWinRate()
         {
@@ -46,13 +48,19 @@ namespace Risk.Service
             var avg = repository.SettledRecords
                 .GroupBy(x => new { Cust = x.Customer })
                 .Select(g => new { Avg = g.Average(x => x.Stake), Cust = g.Key.Cust });
-            var result = from cus in avg
-                         join c in repository.UnsettledRecords
-                         on cus.Cust equals c.Customer
-                         where c.Stake / rate > cus.Avg
-                         select c;
+            var result = from cus in repository.UnsettledRecords
+                         join c in avg
+                         on cus.Customer equals c.Cust
+                         where cus.Stake / rate > c.Avg
+                         select new UnSettled() { Customer = cus.Customer, Event = cus.Event };
 
             return result;
         }
+
+        public IEnumerable<UnSettled> GetUnsettledBigWin()
+        {
+            return repository.UnsettledRecords.Where(x => x.ToWin > 1000);
+        }
+
     }
 }

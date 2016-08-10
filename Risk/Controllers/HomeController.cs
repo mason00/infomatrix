@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Risk.Service;
 using System.Web.Mvc;
 
 namespace Risk.Controllers

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Risk.Data.Settled>
+
+@{
+    ViewBag.Title = "High Win";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<table>
+    <tr>
+        <th>Customer</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => item.Customer)</td>
+        </tr>
+    }
+</table>

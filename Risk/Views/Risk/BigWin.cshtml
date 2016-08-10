@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Risk.Data.UnSettled>
+
+@{
+    ViewBag.Title = "Big Win bets";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<table>
+    <tr>
+        <th>Customer</th>
+        <th>Event</th>
+        <th>Participant</th>
+        <th>Stake</th>
+        <th>To Win</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(model => item.Customer)</td>
+            <td>@Html.DisplayFor(model => item.Event)</td>
+            <td>@Html.DisplayFor(model => item.Participant)</td>
+            <td>@Html.DisplayFor(model => item.Stake)</td>
+            <td>@Html.DisplayFor(model => item.ToWin)</td>
+        </tr>
+    }
+</table>
