@@ -8,12 +8,21 @@ namespace Risk.Tests
     [TestClass]
     public class BetRepositoryTests
     {
+        string settledPath = @"C:\Users\ZhenXin\Source\Repos\infomatrix\Risk.Tests\TestFiles\Settled.csv";
+        string unsettledPath = @"C:\Users\ZhenXin\Source\Repos\infomatrix\Risk.Tests\TestFiles\Unsettled.csv";
+
         [TestMethod]
         public void LoadSettledTest()
         {
-            var path = @"C:\Users\ZhenXin\Source\Repos\infomatrix\Risk.Tests\TestFiles\Settled.csv";
-            var repo = new BetRepository(path, null);
+            var repo = new BetRepository(settledPath, unsettledPath);
             Assert.AreEqual(50, repo.SettledRecords.Count());
+        }
+
+        [TestMethod]
+        public void LoadUnSettledTest()
+        {
+            var repo = new BetRepository(settledPath, unsettledPath);
+            Assert.AreEqual(22, repo.UnsettledRecords.Count());
         }
     }
 }
