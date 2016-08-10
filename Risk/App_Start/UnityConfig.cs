@@ -42,7 +42,7 @@ namespace Risk.App_Start
 
             // TODO: Register your types here
             container.RegisterType<IBetService, BetService>();
-            container.RegisterType<IBetRepository, BetRepository>(new InjectionConstructor(settledPath, unsettledPath));
+            container.RegisterType<IBetRepository, BetRepository>();
         }
     }
 }
