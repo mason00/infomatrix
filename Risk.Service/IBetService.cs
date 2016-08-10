@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Risk.Data;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Risk.Service
 {
     public interface IBetService
     {
-
+        IEnumerable<Settled> GetUnusualWin();
+        IEnumerable<UnSettled> GetHighRiskBets();
     }
 }

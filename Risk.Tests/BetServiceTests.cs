@@ -24,6 +24,20 @@ namespace Risk.Tests
 
             Assert.AreEqual(1, service.GetUnusualWin().Count());
         }
+
+        [TestMethod]
+        public void UnsettledHighRiskBets()
+        {
+            var testData = new List<UnSettled>();
+            testData.Add(new UnSettled() { Stake = 55, ToWin = 100 });
+            testData.Add(new UnSettled() { Stake = 65, ToWin = 100 });
+
+            var mockRepo = new Mock<IBetRepository>();
+            mockRepo.Setup(repo => repo.UnsettledRecords).Returns(testData);
+            var service = new BetService(mockRepo.Object);
+
+            Assert.AreEqual(1, service.GetHighRiskBets().Count());
+        }
     }
 }
 

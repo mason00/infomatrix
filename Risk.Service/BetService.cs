@@ -16,9 +16,21 @@ namespace Risk.Service
             repository = repo;
         }
 
+        public IEnumerable<UnSettled> GetHighRiskBets()
+        {
+            var result = new List<UnSettled>();
+            result.AddRange(GetUnsettledHighWinRate());
+            return result;
+        }
+
         public IEnumerable<Settled> GetUnusualWin()
         {
             return repository.SettledRecords.Where(x => (double)x.Stake / (double)x.Win > 0.6);
+        }
+
+        private IEnumerable<UnSettled> GetUnsettledHighWinRate()
+        {
+            return repository.UnsettledRecords.Where(x => (double)x.Stake / (double)x.ToWin > 0.6);
         }
     }
 }
