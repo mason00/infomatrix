@@ -44,6 +44,12 @@
     <Compile Include="IBetService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Risk.Data\Risk.Data.csproj">
+      <Project>{0742324f-8443-4335-82ac-0f84f7390a00}</Project>
+      <Name>Risk.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
