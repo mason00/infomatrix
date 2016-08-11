@@ -104,10 +104,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Risk.Data\Risk.Data.csproj">
-      <Project>{0742324F-8443-4335-82AC-0F84F7390A00}</Project>
-      <Name>Risk.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Risk.Service\Risk.Service.csproj">
       <Project>{5AA6593C-05FB-4628-ACB2-702BA225FBF3}</Project>
       <Name>Risk.Service</Name>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5AA6593C-05FB-4628-ACB2-702BA225FBF3}</ProjectGuid>
+    <ProjectGuid>{0742324F-8443-4335-82AC-0F84F7390A00}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Risk.Service</RootNamespace>
-    <AssemblyName>Risk.Service</AssemblyName>
+    <RootNamespace>Risk.Data</RootNamespace>
+    <AssemblyName>Risk.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BetService.cs" />
-    <Compile Include="IBetService.cs" />
+    <Compile Include="BetRepository.cs" />
+    <Compile Include="IBetRepository.cs" />
+    <Compile Include="Settled.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnSettled.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
